@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignUp/Login</title>
+    <meta charset="UFT-8">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+         .header1 nav {
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center; /* Vertically align items */
+        }
+
+        .header1 nav a {
+            font-size: 1.2em; /* Increase font size */
+            font-weight: bold; /* Make text bold */
+            margin-left: 20px; /* Add spacing between links */
+            text-decoration: none; /* Remove underlines */
+            color: black; /* Set text color */
+        }
+
+        .header1 nav a.button {
+            /* Keep button styles as they are */
+            .header1 nav a.button {
+    background-color: #D9534F; /* Example button color */
+    color: white; /* Example text color */
+    text-decoration: none; /* Remove underlines */
+    font-size: 1em; /* Adjust font size as needed */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Adjust padding for button size */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: bold; /* Make the button text bold */
+
+}
+
+.header1 nav a.button:hover {
+    background-color: #c04744; /* Darker color on hover */
+}
+
+/* Optionally, you can add different styles for different buttons */
+.header1 nav a.button.secondary {
+    background-color: #96CEB4; /* Example secondary button color */
+    color: black;
+}
+
+.header1 nav a.button.secondary:hover {
+    background-color: #82b9a1;
+}
+
+.header1 nav a.button.outline{
+  background-color: transparent;
+  color: #D9534F;
+  border: 2px solid #D9534F;
+}
+
+.header1 nav a.button.outline:hover{
+  background-color: #f8f8f8;
+}
+        }
+
+        .img2 {
+            width: 65%;
+            position: relative;
+            top: 0;
+            left: 0;
+            height: auto;
+        }
+
+        .img3 {
+            width: 60%;
+            position: absolute;
+            top: 10%;
+            left: 25%;
+            height: auto;
+           
+        }
+
+        .div2 {
+            padding: 30px 10px 130px 50px;
+            border: 2px solid #96CEB4;
+            margin-right: 120px;
+            margin-top: 30px;
+            font-family: sans-serif;
+            line-height: 1.4;
+            box-shadow: rgba(150, 206, 180, 0.4) 0px 5px, rgba(150, 206, 180, 0.3) 0px 10px, rgba(150, 206, 180, 0.2) 0px 15px, rgba(150, 206, 180, 0.1) 0px 20px, rgba(150, 206, 180, 0.05) 0px 25px;
+        }
+
+        .big {
+            line-height: 1.5;
+            font-size: 17px;
+        }
+
+        .row {
+            padding: 50px;
+        }
+
+        .row:after {
+                content: "";
+                display: table;
+                clear: both;
+        }
+
+        .column {
+            float:left;
+            width: 50%;
+            padding:10px;
+        }
+
+        .parent {
+            position: relative;
+            top: 0;
+            left: 0;
+            margin-left: 105px;
+            margin-top: 16px;
+        }
+        
+        .button1 {
+            background: none;
+            border: none;
+            font-size: 18px;
+            border-bottom: 2px solid #FFAD60;
+        }
+
+        .button1:hover {
+                cursor: pointer;
+                color: #FFAD60;
+        }
+
+        .button1 p {
+                margin: 0px;
+                margin-bottom: 1px;
+        }
+        .button1 p:hover {
+                transform: translateY(-8px);
+                transition: all 0.3s ease-in;
+        }
+        #h21,#h22 {
+            font-weight: 500;
+            font-size: 34px;
+            line-height: 0.8;
+        }
+
+        .button2 {
+            background: none;
+            border: none;
+            font-size: 18px;
+            border-bottom: 2px solid #D9534F;
+        }
+
+        .button2:hover {
+                cursor: pointer;
+                color: #D9534F;
+        }
+
+        .button2 p {
+                margin: 0px;
+                margin-bottom: 1px;
+        }
+
+        .button2 p:hover {
+            transform: translateY(-8px);
+            transition: all 0.3s ease-in-out;
+                    
+        }
+
+        hr {
+            border: 1px solid #8CBFA7;
+        }
+
+        #hrstyle {
+            border: none;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), #96CEB4, rgba(0, 0, 0, 0));
+        }
+
+        .form-popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: transparent;
+        }
+
+        .content_signup {
+            background-color: #798881;
+            color: white;
+            margin: 5% auto 15% auto;
+            width: 50%;
+            opacity: 0.9;
+        }
+
+        .container_signup {
+            padding: 16px;
+        }
+
+        .close {
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            color: white;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            background-color: red;
+        }
+
+        .cancelbtn {
+            float: right;
+            width: 40%;
+        }
+
+        .cancelbtn:hover {
+                cursor: pointer;
+                color: #66726C;
+        }
+
+        .signupbtn {
+            float: left;
+            width: 40%;
+        }
+
+        .signupbtn:hover {
+                color: #66726C;
+                cursor: pointer;
+        }
+
+        .cancelbtn, .signupbtn {
+            padding: 10px;
+            margin: 2%;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .clear::after {
+            
+            clear: both;
+            
+        }
+
+        select, .container_signup input[type=text],input[type=password]{
+            width: 60%;
+            padding: 15px;
+            margin: 5px 0 22px 5px;
+            display: inline-block;
+            border: none;
+            
+            background: #f1f1f1;
+            outline: none;
+        }
+
+        #bottom_s {
+            margin-bottom: 80px;
+        }
+
+        #icon1,#icon2,#icon3,#icon4,#icon5,#icon6 {
+            float: right;
+            margin-right: 290px;
+            margin-top: -55px;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+            color:#4d1e1c;
+        }
+        .error1{
+            color:#4d1e1c;
+            font-family: sans-serif;
+            font-size: 15px;
+            margin-left:10px;
+            font-weight:bolder;
+            
+        }
+        .button3{
+            background-color: #bbbbbb;
+            color: #122929;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            display: none;
+        }
+        .button3:hover{
+            
+            color:#5c8178;
+        }
+        table{
+            margin:35px auto 20px auto;
+        }
+        table a{
+            font-family: sans-serif;
+            
+        }
+        
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    
+</head>
+<body>
+
+    <header class="header1">
+
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"> <img src="images/logo2.png" alt="Logo"> </a>
+            </div>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="/aboutus">ABOUT US</a>
+                <a href="/courses">COURSES</a>
+                <a class="button" href="/signup&Login">LOGIN</a>
+            </nav>
+        </div>
+        
+    </header>
+
+    <div class="row">
+        <div class="column">
+            <div class="parent">
+                <img src="images/orangecircle.png" alt="OrangeCircle" class="img3">
+                <img src="images/teacher.png" alt="Teacher" class="img2">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="div2">
+
+                <h2 id="h21">Tutor</h2>
+                <p class="big">
+                    ​You want to become an online or offline teacher and make money?<br>
+                    Well all you have to do is sign up and provide us with all the information we need to contact you to find out if you have all the qualifications and capabilities needed to become a teacher.
+                    <br>
+                    So sign up now!<br>
+                </p>
+                <a href="/tutor"><button class="button1" title="Sign Up" id="button1S"><p>Sign Up</p></button></a>
+                <br><br><br><br>
+                <!-- <p><b>Already have an account?</b><br></p>
+                <button class="button1" title="Login" id="button1LT"><p>Login</p></button> -->
+           
+            
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="signupT" class="form-popup">
+        <form id="signup_teacher" class="content_signup" action="" method="post">
+            <div class="container_signup">
+                
+                    
+                    <button id="closeST" class="close" title="Close">&times;</button>
+                    <h1>Sign Up</h1>
+                    <p>Please provide us with all the information needed</p>
+                    <hr>
+                    <label style="margin-left:5px;" for="fname"><b>Full Name</b></label><br>
+                    <input type="text" placeholder="Enter Full Name" id="fname" name="fname" ><br>
+                    <!-- <label style="margin-left:5px;" for="lname"><b>Last Name</b></label><br>
+                    <input type="text" placeholder="Enter last Name" id="lname" name="lname" ><br> -->
+                    <label style="margin-left:5px;" for="emailST"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" id="emailST" name="emailST" ><br>
+                    <!-- <label style="margin-left:5px;" for="countries"><b>Country</b></label><br> -->
+                    
+                    </select><br>
+                    <label style="margin-left:5px;" for="numST"><b>Phone Number</b></label><br>
+                    <input type="text" placeholder="Enter Your Phone Number" id="numST" name="numST" ><br>
+                    <label style="margin-left:5px;" for="passST"><b> Password<span style="color:#272727; font-weight: bolder;"> (Must Have At Least 1 Uppercase Letter)</span></b></label><br>
+                    <input id="pass1" type="password" placeholder="Enter Password"  name="passST"><br>
+                    <span onclick="togglevisibility()" id="icon1" class="material-icons">visibility</span>
+                    <label style="margin-left:5px;" for="cpassST"><b>Confirm Password</b></label><br>
+                    <input id="pass2" type="password" placeholder="Confirm Password"  name="cpassST" ><br>
+                    <span onclick="togglevisibility1()" id="icon2" class="material-icons">visibility</span>
+                    <input type="checkbox" id="cbt" style="margin-left:5px;"><p style="display: inline;" id="policy1">By creating an account you agree to our <a href="#" style="color:black">Terms & Privacy.</a></p>
+                    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+                    
+                    <div class="clear">
+                        <button id="cancelST" title="Cancel" class="cancelbtn">Cancel</button>
+                        <input type="submit" id="submitST" title="Sign Up" class="signupbtn" value="Sign Up">
+                        
+                    </div>
+                    <table><tr><td><a id="STpage" class="button3" href="teacher_page.html">Teacher's Page</a></td></tr></table>
+                
+            </div>
+       
+        </form>
+    </div>
+    <div id="loginT" class="form-popup">
+
+        <form class="content_signup" id="login_teacher" action="" method="post">
+
+            <div class="container_signup">
+               
+                    <button id="closeLT"  class="close" title="Close">&times;</button>
+                    <h1>Login</h1>
+                    <p>Please enter correct information</p>
+                    <hr>
+                    <label style="margin-left:5px;" for="emailLT"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" id="emailLT" name="emailLT"><br>
+                    <label style="margin-left:5px;" for="passLT"><b> Password</b></label><br>
+                    <input id="pass3" type="password" placeholder="Enter Password" name="passLT"><br>
+                    <span onclick="togglevisibility2()" id="icon3" class="material-icons">visibility</span>
+                    <p><a href="#">Forgot Password?</a></p>
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Sign Up</a></p>
+                    <div class="clear">
+                        <button id="cancelLT" title="Cancel" class="cancelbtn">Cancel</button>
+                        <input type="submit" id="submitLT" title="Login" class="signupbtn" value="Login">
+                    </div>
+                    <table><tr><td><a id="LTpage" class="button3" href="teacher_page.html">Teacher's Page</a></td></tr></table>
+               
+            </div>
+        </form>
+    </div>
+
+    <hr id="hrstyle">
+    <div class="row" id="bottom_s">
+        <div class="column">
+            <div class="parent">
+                <img src="images/redcircle.png" alt="RedCircle" class="img3">
+                <img src="images/studying.png" alt="Studying" class="img2">
+            </div>
+        </div>
+        <div class="row">
+            <div class="div2">
+
+                <h2 id="h22">Student</h2>
+                <p class="big">
+                    ​​Looking to learn new subjects with reasonable prices?<br>
+                    Then you've come to the right place.<br>
+                    Here,you can find a variety of courses with excellent and trusted teachers.What are you waiting for?<br>
+                    Sign up Now!<br>
+                </p>
+                <a href="/student"><button class="button2" title="Sign Up" id="button2S"><p>Sign Up</p></button></a>
+                <br><br><br><br>
+                <!-- <p><b>Already have an account?</b><br></p> -->
+                <!-- <button class="button2" title="Login" id="button2L"><p>Login</p></button> -->
+            </div>
+        </div>
+    </div>
+    <div id="signupS" class="form-popup">
+        <form class="content_signup" id="signup_student" action="" method="post">
+            <div class="container_signup">
+               
+                    <legend>Become A Student</legend>
+                    <button id="closeSS"  class="close" title="Close">&times;</button>
+                    <h1>Sign Up</h1>
+                    <p>Please provide us with all the information needed</p>
+                    <hr>
+                    <label style="margin-left:5px;" for="fname1"><b>Full Name</b></label><br>
+                    <input type="text" placeholder="Enter Full Name" id="fname1" name="fname1" ><br>
+                    <label style="margin-left:5px;" for="emailSS"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" name="emailSS" id="emailSS"><br>
+                    
+                    
+                        
+                    </select><br>
+                    <label style="margin-left:5px;" for="numSS"><b>Phone Number</b></label><br>
+                    <input type="text" placeholder="Enter Your Phone Number" name="numSS" id="numSS"><br>
+                    <label style="margin-left:5px;" for="passSS"><b> Password<span style="color:#272727; font-weight: bolder;"> (Must Have At Least 1 uppercase Letter)</span></b></label><br>
+                    <input id="pass4" type="password" placeholder="Enter Password"  name="passSS"><br>
+                    
+                    <span onclick="togglevisibility3()" id="icon4" class="material-icons">visibility</span>
+                    <label style="margin-left:5px;" for="cpassSS"><b>Confirm Password</b></label><br>
+                    <input id="pass5" type="password" placeholder="Confirm Password" name="cpassSS"><br>
+                    <span onclick="togglevisibility4()" id="icon5" class="material-icons">visibility</span>
+                    <input type="checkbox" id="cbs" style="margin-left:5px;"><p style="display: inline;" id="policy2">By creating an account you agree to our <a href="#" style="color:black">Terms & Privacy.</a></p>
+                    <div class="clear">
+                        <button id="cancelSS"  title="Cancel" class="cancelbtn">Cancel</button>
+                        <input type="submit" id="submitSS" title="Sign Up" class="signupbtn" value="Sign Up">
+                    </div>
+                    <table><tr><td><a id="SSpage" class="button3" href="Courses.html">Student's Page</a></td></tr></table>
+                
+            </div>
+        </form>
+    </div>
+
+
+    <div id="loginS" class="form-popup">
+
+        <form class="content_signup" id="login_student" action="" method="post">
+
+            <div class="container_signup">
+               
+                    <button id="closeLS"  class="close" title="Close">&times;</button>
+                    <h1>Login</h1>
+                    <p>Please enter correct information</p>
+                    <hr>
+                    <label style="margin-left:5px;" for="emailLS"><b>Email</b></label><br>
+                    <input type="text" placeholder="Enter Email" name="emailLS" id="emailLS"><br>
+                    <label style="margin-left:5px;" for="passLS"><b> Password</b></label><br>
+                    <input id="pass6" type="password" placeholder="Enter Password" name="passLS"><br>
+                    <span onclick="togglevisibility5()" id="icon6" class="material-icons">visibility</span>
+                    <div class="clear">
+                        <button id="cancelLS"  title="Cancel" class="cancelbtn">Cancel</button>
+                        <input type="submit" id="submitLS" title="Login" class="signupbtn" value="Login">
+                    </div>
+                    <table><tr><td><a id="LSpage" class="button3" href="Courses.html">Student's Page</a></td></tr></table>
+                
+            </div>
+        </form>
+    </div>
+    
+    
+
+
+</body>
+<script>
+    function showLogin() {
+        document.getElementById('signup_teacher').classList.add('hidden');
+        document.getElementById('login_teacher').classList.remove('hidden');
+    }
+
+    function showRegister() {
+        document.getElementById('login_teacher').classList.add('hidden');
+        document.getElementById('signup_teacher').classList.remove('hidden');
+    }
+</script>
+</html>

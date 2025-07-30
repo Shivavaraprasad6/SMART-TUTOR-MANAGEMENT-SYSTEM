@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor List</title>
+    <style>
+        /* ... (Your existing CSS - I'm keeping it for completeness) ... */
+
+        .disclaimer {
+            margin-left: 0px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            width: 30%;
+            float: right;
+            font-size: 20px;
+        }
+
+        .disclaimer a {
+            color: #2d6b2d;
+            text-decoration: none;
+        }
+
+        .disclaimer a:hover {
+            text-decoration: underline;
+        }
+
+        .modal-details-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-image: url('images/books4.png'); /* Replace 'your-image.jpg' with your image path */
+            background-size: cover; /* Ensure the image covers the entire body */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #2d6b2d;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 18px;
+        }
+
+        nav .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Search & Filter Section */
+        .search-filter-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-container select {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        /* Tutor Section */
+        .tutor-container {
+            padding: 0px;
+        }
+
+        .tutor-card {
+            background: white;
+            padding: 20px;
+            margin: 10px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            text-align: middle;
+        }
+
+        .tutor-card h4 {
+            color: #2d6b2d;
+        }
+
+        .tutor-card p {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .details-btn {
+            background-color: #2d6b2d;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .details-btn:hover {
+            background-color: #dbe6db;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .modal img {
+            width: 200px;
+            border-style: 200%;
+            margin-bottom: 100px;
+        }
+
+        #tutor-video {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .button {
+            background-color: #2d6b2d;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s ease;
+        }
+
+        .buttn:hover {
+            background-color: #1e4a1e;
+        }
+
+        /* Payment Modal */
+        #click-modal .modal-content {
+            width: 50%;
+            padding: 25px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2d6b2d;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .certificate-link {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .certificate-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .certificate-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Smart Tutor Management System</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <img src="/images/logo2.png" alt="Logo">
+    <div class="search-filter-container">
+        <input type="text" id="searchBar" class="search-bar" placeholder="Search by tutor name or details...">
+        <div class="filter-container">
+            <select id="subjectFilter">
+                <option value="">Filter by Subject</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Soft Skills">Soft Skills</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="Aws Devops">Aws Devops</option>
+                <option value="AI&ML">AI&ML</option>
+            </select>
+            <select id="modeFilter">
+                <option value="">Filter by Mode</option>
+                <option value="Online">Online</option>
+                <option value="Offline">Offline</option>
+                <option value="Online/Offline">Online/Offline</option>
+            </select>
+            <select id="locationFilter">
+                <option value="">Filter by Location</option>
+                <option value="Narsampet">Narsampet</option>
+                <option value="Warangal">Warangal</option>
+                <option value="Hanamkonda">Hanamkonda</option>
+                <option value="Hyderabad">Hyderabad</option>
+            </select>
+        </div>
+    </div>
+    <div class="tutor-container" id="tutorList">
+    </div>
+    <div id="tutorModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalDetails">
+            </div>
+        </div>
+    </div>
+    <script>
+        const tutorList = document.getElementById('tutorList');
+        const searchBar = document.getElementById('searchBar');
+        const subjectFilter = document.getElementById('subjectFilter');
+        const modeFilter = document.getElementById('modeFilter');
+        const locationFilter = document.getElementById('locationFilter');
+        const initialTutors = [{
+            name: "Aryan Sharma",
+            subject: "Web Development",
+            mode: "Online/Offline",
+            location: "Narsampet",
+            duration: "3 Months",
+            package: "₹4,999",
+            rating: "⭐⭐⭐⭐⭐",
+            contact: "+91 1234567890",
+            email: "aryan@gmail.com",
+            profile: "images/profile1.jpg",
+            video: "images/1.mp4",
+            experience: "5 years as a web developer and trainer.",
+            // experienceCertificate: "link_to_certificate_1.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/aryan-sharma",
+        }, {
+            name: "Priya Singh",
+            subject: "Soft Skills",
+            mode: "Offline",
+            location: "Warangal",
+            duration: "4 Months",
+            package: "₹5,999",
+            rating: "⭐⭐⭐⭐",
+            contact: "+91 1234567890",
+            email: "priya@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "8 years in corporate training and soft skills development.",
+            // experienceCertificate: "link_to_certificate_2.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/priya-singh",
+        }, {
+            name: "Rahul Verma",
+            subject: "Java",
+            mode: "Offline",
+            location: "Narsampet",
+            duration: "2 Months",
+            package: "₹3,499",
+            rating: "⭐⭐⭐⭐⭐",
+            contact: "+91 9876543210",
+            email: "rahul@gmail.com",
+            AboutMe: "Experienced Java Tutor",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "10+ years of Java development and teaching experience.",
+            // experienceCertificate: "link_to_certificate_3.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/rahul-verma",
+
+        }, {
+            name: "Anjali Gupta",
+            subject: "Java",
+            mode: "Offline",
+            location: "Hanamkonda",
+            duration: "6 Months",
+            package: "₹7,999",
+            rating: "⭐⭐⭐⭐",
+            contact: "+91 8765432190",
+            email: "anjali@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "6 years specializing in Java for enterprise applications.",
+            // experienceCertificate: "link_to_certificate_4.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/anjali-gupta",
+        }, {
+            name: "Vikas Patil",
+            subject: "Python",
+            mode: "Offline",
+            location: "Warangal",
+            duration: "5 Months",
+            package: "₹6,499",
+            rating: "⭐⭐⭐",
+            contact: "+91 7654321098",
+            email: "vikas@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "4 years of Python development and data science training.",
+            // experienceCertificate: "link_to_certificate_5.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/vikas-patil",
+        }, {
+            name: "Riya Mehta",
+            subject: "Aws Devops",
+            mode: "Online",
+            location: "Narsampet",
+            duration: "3 Months",
+            package: "₹4,799",
+            rating: "⭐⭐⭐⭐⭐",
+            contact: "+91 6543210987",
+            email: "riya@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "7 years in AWS DevOps, automation, and cloud infrastructure.",
+            // experienceCertificate: "link_to_certificate_6.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/riya-mehta",
+        }, {
+            name: "Karan Malhotra",
+            subject: "AI&ML",
+            mode: "Offline",
+            location: "Hyderabad",
+            duration: "4 Months",
+            package: "₹5,999",
+            rating: "⭐⭐⭐⭐",
+            contact: "+91 5432109876",
+            email: "karan@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "3 years of experience in AI and Machine Learning research.",
+            // experienceCertificate: "link_to_certificate_7.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/karan-malhotra",
+        }, {
+            name: "Sanya Arora",
+            subject: "Python",
+            mode: "Online/Offline",
+            location: "Hyderabad",
+            duration: "2 Months",
+            package: "₹3,999",
+            rating: "⭐⭐⭐⭐",
+            contact: "+91 4321098765",
+            email: "sanya@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "2 years specializing in Python for web development.",
+            // experienceCertificate: "link_to_certificate_8.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/sanya-arora",
+        }, {
+            name: "Abhishek Yadav",
+            subject: "Web Development",
+            mode: "Online",
+            location: "Hanamkonda",
+            duration: "3 Months",
+            package: "₹4,299",
+            rating: "⭐⭐⭐",
+            contact: "+91 3210987654",
+            email: "abhishek@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "5+ years building modern web applications.",
+            // experienceCertificate: "link_to_certificate_9.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/abhishek-yadav",
+        }, {
+            name: "Neha Reddy",
+            subject: "Aws Devops",
+            mode: "Offline",
+            location: "Hyderabad",
+            duration: "6 Months",
+            package: "₹6,999",
+            rating: "⭐⭐⭐⭐⭐",
+            contact: "+91 2109876543",
+            email: "neha@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "8 years in cloud solutions and DevOps practices.",
+            // experienceCertificate: "link_to_certificate_10.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/neha-reddy",
+        }, {
+            name: "Amit Sharma",
+            subject: "Java",
+            mode: "Online",
+            location: "Warangal",
+            duration: "5 Months",
+            package: "₹5,999",
+            rating: "⭐⭐⭐⭐",
+            contact: "+91 1098765432",
+            email: "amit@gmail.com",
+            profile: "https://via.placeholder.com/100",
+            video: "https://www.w3schools.com/html/mov_bbb.mp4",
+            experience: "7 years of Java development and training.",
+            // experienceCertificate: "link_to_certificate_11.pdf",
+            linkedinUrl: "https://www.linkedin.com/in/amit-sharma",
+        }];
+
+        let tutors = [];
+
+        function displayTutors(tutorsToDisplay) {
+            tutorList.innerHTML = ''; // Clear the tutor list
+            tutorsToDisplay.forEach((tutor) => { // Changed from index to tutor
+                const tutorCard = document.createElement('div');
+                tutorCard.className = 'tutor-card';
+                tutorCard.innerHTML = `
+                    <h4>${tutor.name}</h4>
+                    <p><strong>Subject:</strong> ${tutor.subject}</p>
+                    <p><strong>Location:</strong> ${tutor.location || 'N/A'}</p>
+                    <p><strong>Mode:</strong> ${tutor.mode}</p>
+                    <button class="details-btn view-details" data-tutor='${JSON.stringify(tutor)}'>View Details</button>
+                `;
+                tutorList.appendChild(tutorCard);
+            });
+        }
+
+        function filterTutors() {
+            const searchTerm = searchBar.value.toLowerCase();
+            const selectedSubject = subjectFilter.value;
+            const selectedMode = modeFilter.value;
+            const selectedLocation = locationFilter.value;
+
+            let filteredTutors = tutors.filter(tutor => {
+                const nameMatch = tutor.name.toLowerCase().includes(searchTerm);
+                const subjectMatch = selectedSubject === "" || tutor.subject === selectedSubject;
+                const modeMatch = selectedMode === "" || tutor.mode === selectedMode;
+                const locationMatch = selectedLocation === "" || tutor.location.toLowerCase().includes(selectedLocation.toLowerCase());
+
+                return nameMatch && subjectMatch && modeMatch && locationMatch;
+            });
+            displayTutors(filteredTutors);
+        }
+
+        function loadTutorProfiles() {
+            const storedProfiles = localStorage.getItem('tutorProfiles');
+            let createdTutors = storedProfiles ? JSON.parse(storedProfiles) : [];
+            // Combine initial tutors and created tutors, giving priority to initial tutors in case of duplicates
+            const combinedTutors = [...initialTutors, ...createdTutors];
+
+            // Use a Set to track unique tutors based on their name or a unique identifier
+            const uniqueTutors = Array.from(new Map(combinedTutors.map(tutor => [tutor.name, tutor])).values());
+            tutors = uniqueTutors;
+            displayTutors(tutors); // Display all tutors
+            filterTutors(); // Apply filters
+        }
+
+        // Initial load
+        loadTutorProfiles();
+
+        // Event listeners for search and filters
+        searchBar.addEventListener('input', filterTutors);
+        subjectFilter.addEventListener('change', filterTutors);
+        modeFilter.addEventListener('change', filterTutors);
+        locationFilter.addEventListener('change', filterTutors);
+
+        // Modal Logic
+        const modal = document.getElementById('tutorModal');
+        const modalDetails = document.getElementById('modalDetails');
+        const closeModal = document.querySelector('.close-btn');
+
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('view-details')) {
+                const tutor = JSON.parse(event.target.dataset.tutor);
+                let videoHTML = '';
+                if (tutor.video) {
+                    videoHTML = `<video width="640" height="480" controls>
+                                    <source src="${tutor.video}" type="video/mp4">
+                                     Your browser does not support the video tag.
+                                  </video>`;
+                }
+
+                let experienceHTML = tutor.experience ? `<p><strong>Experience:</strong> ${tutor.experience}</p>` : '';
+                let certificateHTML = tutor.experienceCertificate ?
+                    `<p class="certificate-link">
+                        <a href="${tutor.experienceCertificate}" target="_blank">Experience Certificate</a>
+                     </p>` : '';
+                let linkedinHTML = tutor.linkedinUrl ?
+                    `<p><strong>LinkedIn:</strong> <a href="${tutor.linkedinUrl}" target="_blank">${tutor.linkedinUrl}</a></p>` : '';
+
+
+                modalDetails.innerHTML = `
+                    <div class="modal-details-container">
+                        <div>
+                            <div style="text-align: center;">
+                                 <img src="${tutor.profile}" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
+                            </div>
+                            <h4>${tutor.name}</h4>
+                            <p><strong>Subject:</strong> ${tutor.subject}</p>
+                            <p><strong>Duration:</strong> ${tutor.duration}</p>
+                            <p><strong>Mode:</strong> ${tutor.mode}</p>
+                            <p><strong>Package:</strong> ${tutor.package}</p>
+                            <p><strong>Location:</strong> ${tutor.location || 'N/A'}</p>
+                            <p><strong>Email:</strong> ${tutor.email }</p>
+                            ${experienceHTML}
+                            ${certificateHTML}
+                            ${linkedinHTML}
+                            ${videoHTML}
+                            <button class="button enroll-btn" data-tutor='${JSON.stringify(tutor)}'>Enroll</button>
+                        </div>
+                        <div class="disclaimer">
+                            <strong>Disclaimer:</strong><br>
+                            <div class="course-section">
+                                <h2 class="course-title">Online Enrollment</h2>
+                                <p>For online enrolled students:</p>
+                                <ul>
+                                    <li>You will be invited to join a WhatsApp group.</li>
+                                    <li>The Zoom link for online classes will be shared in the WhatsApp group.</li>
+                                    <li>Payment process details will be updated in the WhatsApp group.</li>
+                                </ul>
+                            </div>
+                            <div class="course-section">
+                                <h2 class="course-title">Offline Enrollment</h2>
+                                 <p>For offline enrolled students:</p>
+                                <ul>
+                                    <li>You can attend classes at the physical location.</li>
+                                    <li>You will be added to a separate WhatsApp group for offline students.</li>
+                                    <li>Other relevant details will be shared in the offline WhatsApp group or in person.</li>
+                                    <li>Payment process details will be updated in the WhatsApp group or communicated offline.</li>
+                                </ul>
+                            </div>
+                            <br><br>
+                            Join our WhatsApp group for more details: <a href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank">Join WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'block';
+            }
+        });
+
+        closeModal.onclick = function () {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('enroll-btn')) {
+                const tutor = JSON.parse(event.target.dataset.tutor);
+                alert(`Enrolling in ${tutor.name}'s course.`);
+                // You can add further enrollment logic here, like sending data to a server.
+            }
+        });
+    </script>
+</body>
+
+</html>

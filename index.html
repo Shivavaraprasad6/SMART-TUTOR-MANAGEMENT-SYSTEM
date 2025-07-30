@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <title>SMART TUTOR MANAGEMENT SYSTEM</title>
+    <!-- specify the character encoding for the HTML document -->
+    <meta charset="UTF-8">
+    <link rel="icon" type="/image/x-icon" href="/images/logo.png">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .header1 nav {
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center; /* Vertically align items */
+        }
+
+        .header1 nav a {
+            font-size: 1.2em; /* Increase font size */
+            font-weight: bold; /* Make text bold */
+            margin-left: 20px; /* Add spacing between links */
+            text-decoration: none; /* Remove underlines */
+            color: black; /* Set text color */
+        }
+
+        .header1 nav a.button {
+            /* Keep button styles as they are */
+            .header1 nav a.button {
+    background-color: #D9534F; /* Example button color */
+    color: white; /* Example text color */
+    text-decoration: none; /* Remove underlines */
+    font-size: 1em; /* Adjust font size as needed */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Adjust padding for button size */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: bold; /* Make the button text bold */
+
+}
+
+.header1 nav a.button:hover {
+    background-color: #c04744; /* Darker color on hover */
+}
+
+/* Optionally, you can add different styles for different buttons */
+.header1 nav a.button.secondary {
+    background-color: #96CEB4; /* Example secondary button color */
+    color: black;
+}
+
+.header1 nav a.button.secondary:hover {
+    background-color: #82b9a1;
+}
+
+.header1 nav a.button.outline{
+  background-color: transparent;
+  color: #D9534F;
+  border: 2px solid #D9534F;
+}
+
+.header1 nav a.button.outline:hover{
+  background-color: #f8f8f8;
+}
+        }
+
+        /*Styling active cells for animation*/
+        .reveal {
+            position: relative;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 3s ease;
+        }
+        .reveal.active {
+            transform: translateY(-20px);
+            opacity: 1;
+        }
+
+        /* styling hero section */
+        .hero1 {
+            height: 500px; 
+            margin: 2px 0;
+        }
+        .hero1 .content {
+            padding: 50px 150px 0 150px;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .hero1 .content h1 {
+            font-size: 60px;
+        }
+
+        .hero1 .hero_img {
+            float: right;
+        }
+
+        .hero1 .button {
+            background-color: #96CEB4;
+            color: black;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 13px 45px;
+        }
+
+        .hero1 .button:hover {
+            background-color: #96ceb494; 
+        }
+
+        .hero1 .intro img { /*icon*/
+            margin-bottom: -3px;
+        }
+
+        /* styling features section */
+        .home_features {
+            background-image: url(images/backgrounds.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            height: 450px;
+        }
+
+        .home_features .container{
+            padding-top: 110px;
+            margin-left: 280px;
+            display: grid;
+            grid-template-columns: repeat(3,240px);
+            grid-gap: 35px;
+        }
+
+        .home_features .feature{
+            border-bottom-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 5px 5px 3px 6px grey;
+            background-color: white;
+            text-align: center;
+            min-height: 280px;
+            padding: 20px;
+            font-size: 14px;
+            font-family: 'Open Sans', sans-serif;
+        } 
+
+
+        /* styling browse courses section */
+
+        .home_browse_courses {
+            height: 600px;
+        }
+
+        .home_browse_courses .container {
+            padding: 90px 100px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home_browse_courses .main_image {
+            float: left;
+        }
+
+        .home_browse_courses .text {
+            font-size: 20px;
+            min-width:700px;
+            max-height:500px;
+            margin-bottom: 30px;
+        }
+
+        .home_browse_courses h1 {
+            font-size: 50px;
+        }
+
+        .browse {
+            padding-left: 450px;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .browse .button {
+            background-color: #D9534F;
+            color: black;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 13px 45px;
+            
+        }
+        .browse .button:hover {
+            background-color: #d9544f94;
+        }
+
+        .browse img{ /*icon*/
+            /* padding-top: 6px; */
+            margin-bottom: -3px;
+        }
+
+        /* styling both student and tutor section */
+
+        .student_tutor_title {
+            height: 200px;
+            width: 570px;
+            background-color: #96CEB4;
+            border-radius: 18px;
+            font-size: 25px;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            padding: 10px;
+            position: absolute;
+            margin-left: 70px;
+            margin-top: 70px;
+        }
+        .student_tutor_title h2 {
+            text-align: center;
+        }
+
+        .student_tutor_title .button {
+            float: right;
+            background-color: #D9534F;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            border: none;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            padding: 9px 25px;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .student_tutor_title .button:hover {
+            background-color: #d9544f94;
+        }
+
+
+        /* styling student section  */
+        .home_student {
+            background-image: url(images/students.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            height: 725px;
+        }
+
+        #student_features {
+            display: grid;
+            grid-template-columns: repeat(3,260px);
+            grid-gap: 30px;
+            padding: 380px 250px;
+        }
+
+        #student_features .feature {
+            background-color: #FFEEAD;
+            opacity: 0.8;
+            font-weight: bold;
+            border-radius: 15px;
+            min-height: 260px;
+            padding: 20px;
+            font-size: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-style: italic;
+        }
+
+        /* styling tutor section */
+
+        .home_tutor .container {
+            height: 700px;
+            padding-top: 30px;
+        }
+
+        .home_tutor .tutor_img 
+        {
+            margin-left: 550px;
+            margin-top: 20px;
+        }
+
+        #tutor_features {
+            display: grid;
+            grid-template-columns: repeat(4,220px);
+            grid-gap: 15px;
+            padding-left:  150px;
+            margin-top: -100px;
+        }
+
+        #tutor_features .feature{
+            background-color: #FFEEAD;
+            box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.418);
+            min-height: 260px;
+            padding: 20px;
+            font-size: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-style: italic;
+            border-radius: 15px;
+        }
+
+
+        /* styling guide section */
+
+        .home_guide {
+            height: 600px;
+            background-color: #FFEEAD;
+            padding: 70px 80px;
+        }
+
+        .home_guide .intro {
+            float: left;
+            width: 550px;
+            font-family: 'Comic Neue', cursive;
+        } 
+
+        .home_guide .intro h1{
+            font-size: 50px;
+        }
+
+        .home_guide .intro .text{
+            font-size: 25px;
+            padding-bottom: 20px;
+        }
+
+        .home_guide .button {
+            background-color: #96CEB4;
+            color: black;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 20px;
+            border: none;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 12px 45px;
+        }
+
+        .home_guide .button:hover {
+            background-color: #96ceb494; 
+        }
+
+        .home_guide .intro img{
+            margin-bottom: -3px;
+        }
+
+        .home_guide .container {
+            padding-left: 50px;
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(2,270px); /*minmax(270px,25%)*/
+            grid-gap: 20px;
+        }
+
+        .home_guide .article{
+            height: 400px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.418);
+            transition: all 0.5s ease;
+        }
+
+        .home_guide .article:hover {
+            transform: translateY(-30px);
+        }
+
+
+        .home_guide .content img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .home_guide .content{
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .home_guide .content h2 {
+            color: #688f7d;
+        }
+
+        .home_guide .more {
+            color: black;
+            text-decoration-color: #688f7d;
+        }
+
+        /* styling popular section */
+
+        .home_popular .white_bg {
+            height: 300px;
+        }
+        .home_popular .green_bg {
+            background-color: #96CEB4;
+            height: 430px;
+        }
+
+        
+
+        /* styling popular tutors section */
+
+        .home_popular .heading1 {
+            font-size: 45px;
+            font-family: 'Comic Neue', cursive;
+            margin-top: 50px;
+            margin-left: 250px;
+            margin-right: 250px;
+            text-align: center;
+            border: 2px solid #96CEB4;
+            padding: 10px;
+            max-height: 80px;
+            min-width: 700px;
+        }
+
+        .home_popular .container1 {
+            display: grid;
+            grid-template-columns: repeat(3,300px);
+            grid-gap: 20px;
+            padding: 20px 200px;
+        }
+
+        .home_popular .teacher {
+            margin-top: -180px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 5px 5px 5px 5px grey;
+            min-height: 400px;
+            padding: 20px 45px;
+            transition: all 0.5s ease;
+        }
+
+        .home_popular .teacher:hover {
+            transform: translateY(-30px);
+        }
+
+        .home_popular .teacher img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .home_popular .teacher h2 {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .home_popular .teacher p {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 900;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        /* styling popular courses section */
+
+        .home_popular .heading2 {
+            font-size: 45px;
+            font-family: 'Comic Neue', cursive;
+            margin-left: 250px;
+            margin-right: 250px;
+            text-align: center;
+            border: 2px solid white;
+            padding: 10px;
+            max-height: 80px;
+            min-width: 700px;
+            margin-top: 60px;
+        }
+
+        .popular_courses .container2 {
+            display: grid;
+            grid-template-columns: repeat(3,360px);
+            padding: 50px 100px;
+            grid-gap: 30px;
+        }
+
+        .popular_courses .course {
+            padding: 20px;
+            box-shadow: 5px 5px 5px 5px rgba(128, 128, 128, 0.418);
+            border-radius: 5px;
+            height: 320px;
+            transition: all 0.5s ease;
+        }
+
+        .popular_courses .course:hover {
+            transform: translateY(-30px);
+        }
+
+        .popular_courses .course .text {
+            margin-top: -8px;
+            text-align: center;
+        }
+
+        .popular_courses .course p {
+            color: #D9534F;
+            font-family: 'Comic Neue', cursive;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .popular_courses .course a {
+            color: black;
+            font-size: 13px;
+            background-color: #D9534F;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-family: 'Open Sans', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .popular_courses .course a:hover {
+            background-color: #d9544f94;
+        }
+
+        .popular_courses img {
+            width: 100%;
+            aspect-ratio: 16/9;
+
+        }
+    
+    </style>
+   
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.n_form').validate();
+        });
+    </script>
+    
+    <script>
+        window.addEventListener('scroll',reveal); 
+        
+        function reveal(){
+            var reveals = document.querySelectorAll('.reveal');
+            
+            for(var i = 0; i<reveals.length;i++) {
+                
+                var windowheight = window.innerHeight; 
+                var revealtop = reveals[i].getBoundingClientRect().top;
+               
+                if(revealtop < windowheight) {
+                    reveals[i].classList.add('active');
+                   
+                }
+                else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    
+    
+    <header class="header1">
+
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"> <img src="/images/logo2.png" alt="Logo"> </a>
+            </div>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="/aboutus">ABOUT US</a>
+                <a href="/courses">COURSES</a>
+               
+                <a class="button" href="/signup&Login">LOGIN</a>
+                <!-- <li><a href="/" class="signup-btn">logout</a></li> -->
+            </nav>
+        </div>
+        
+        
+        
+    </header>
+
+    <main>
+
+        <section class="hero1">
+            <div class="content">
+    
+                <img class="hero_img" src="/images/11.png" width="450" height="450" alt="a girl">
+                <div class="intro">
+                    <h1>Skill Up to Success with Level Up.</h1>
+                    <a class="button" href="/signup&Login">Get Started&nbsp;&nbsp;<img src="/images/1.png" alt="arrow icon" width="20" height="20"></a>
+                </div>
+    
+            </div>
+    
+    
+        </section>
+    
+        <section class="home_features">
+                <div class="container">
+                    <div class="feature reveal">
+                        <img src="/images/12.png" alt="target" width="100" height="100">
+                        <h1>Easy and fun learning</h1>
+                        <p>We provide educational content in a simple, fun and high quality.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <img src="/images/13.png" alt="diverse colors" width="100" height="100">
+                        <h1>Diverse educational content</h1>
+                        <p>We offer diverse and integrated content that serves different categories and fields.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <img src="/images/14.png" alt="technology" width="100" height="100">
+                        <h1>Learn the latest technology</h1>
+                        <p>We provide renewed content according to the latest technologies required in the labor market.</p>
+                    </div>
+                </div>
+        </section>
+        
+    
+        <section class="home_browse_courses">
+            <div class="container">
+                <div class="main_image"><img  src="/images/15.png" alt="Happy Girl" height="400" width="400"></div>
+                <div class="browse">
+                    <h1>Make Learning Easy</h1>
+                    <div class="text">
+                        <p>​With so much to explore, Level Up online tutoring platform empowers 
+                            you to learn new skills, deepen existing passion, and accomplish 
+                            real growth. Learners around the world are launching new careers, 
+                            advancing in their fields, and enriching their lives through our 
+                            courses.
+                        </p>
+                    </div>
+                    <a class="button" href="/courses">Browse Our Courses&nbsp;&nbsp;<img src="/images/1.png" alt="arrow icon" width="20" height="20"></a>
+                </div>
+            </div>
+        </section>
+    
+        <section class="home_student"> 
+            <div class="container">
+                <div class="student_tutor_title" id="student_title">
+                    <h2>Become a Student at Level up!</h2>
+                    <a class="button" href="/student">Sign Up</a>
+                </div>
+    
+                <div class="student_tutor_features" id="student_features">
+                    <div class="feature reveal">
+                        <p>Choose one of our well-designed courses by professional tutors with new additions published every month.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <p>Learn at your own pace, hire a tutor to guide you in your journey.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <p>Explore and navigate life matters using our student guide.</p>
+                    </div>
+    
+                </div>
+            </div>
+        </section>
+    
+        <section class="home_tutor"> 
+            <div class="container">
+                <div class="student_tutor_title" id="tutor_title">
+                    <h2>Become a Teacher at Level up!</h2>
+                    <a class="button" href="/tutor">Sign Up</a>
+                </div>
+                <img class="tutor_img" src="/images/16.png" alt="teachers meeting" height="400" width="650">
+                
+                <div class="student_tutor_features" id="tutor_features">
+                    <div class="feature reveal">
+                        <p>Provide our students the tools and skills needed to learn what they love.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <p>Design and structure your own course and teach it on Level up.</p>
+                    </div>
+            
+                    <div class="feature reveal">
+                        <p>Get a chance to share your experiences and skills through Level up.</p>
+                    </div>
+    
+                    <div class="feature reveal">
+                        <p>Write and Express yourself on our student guide.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="home_guide">
+            
+            <div class="intro">
+                <h1>Improve Your Life Skills</h1>
+                <div class="text">
+                    <p>There's always time to build on your knowledge of essential life skills, and we're here to help you identify and develop the important skills you need. Our student guide covers everything from critical thinking skills like decision-making and problem solving to basic skills in life.</p>
+                </div>
+                <!-- <a class="button" href="Guide.html">Student Guide&nbsp;&nbsp;<img src="/images/1.png" alt="arrow icon" width="20" height="20"></a> -->
+            </div>
+            <div class="container">
+                <div class="article" >
+                    <div class="content">
+                        <img src="/images/17.png" alt="Read More" width="50" height="50">                    <h2>How To Become Successful</h2>
+                        <p>How do we define our success? Is it because we get a big paycheck, live in an extraordinarily 
+                            large home, or drive the fastest car on the block?
+                            Those certainly aren't measures of success.
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="article" >
+                    <div class="content">
+                        <img src="/images/17.png" alt="Read More" width="50" height="50">
+                        <h2>Improve Your Public Speaking Skills</h2>
+                        <p>If the idea of delivering a speech to an audience makes your palms sweat, hopefully you can find 
+                            some reassurance in the fact that you're not the only one who has this reaction. 
+                        </p>
+                        
+                    </div>
+                </div>
+            </div>
+    
+        </section>
+    
+        <section class="home_popular">
+            <div class="white_bg">
+
+                <h1 class="heading1">Get to know our Instructors</h1>
+
+            </div>
+            <div class="green_bg">
+                <div class="container1">
+                    <div class="teacher">
+                        <div class="image">
+                            <img src="/images/teacher1.jpg" alt="teacher" >
+                        </div>
+                        <h2>Amy Smith</h2>
+                        <p>Math/Programming Instructor</p>
+                    </div>
+                    <div class="teacher">
+                        <div class="image">
+                            <img src="/images/teacher2.jpg" alt="teacher">
+                        </div>
+                        <h2>Marie Smith</h2>
+                        <p>Architect</p>
+                    </div>
+                    <div class="teacher">
+                        <div class="image">
+                            <img src="/images/teacher3.jpg" alt="teacher" >
+                        </div>
+                        <h2>James Brown</h2>
+                        <p>Web Developer</p>
+                    </div>
+                </div>
+                <h1 class="heading2">Popular Courses</h1>
+            </div>
+    
+            <div class="popular_courses">
+                <div class="container2">
+                    <div class="course">
+                        <div class="image">
+                            <img src="/images/18.png" alt="course" >
+                        </div>
+                        <div class="text">
+                            <p>Business</p>
+                            <a href="Courses.html">Check Out More</a>
+                        </div>
+                    </div>
+                    <div class="course">
+                        <div class="image">
+                            <img src="/images/19.png" alt="course" >
+                        </div>
+                        <div class="text">
+                            <p>Operating Systems</p>
+                            <a href="Courses.html">Check Out More</a>
+                        </div>
+                    </div>
+                    <div class="course">
+                        <div class="image">
+                            <img src="/images/20.png" alt="course" >
+                        </div>
+                        <div class="text">
+                            <p>English</p>
+                            <a href="Courses.html">Check Out More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+    </main>
+
+    
+
+</body>
+
+</html>

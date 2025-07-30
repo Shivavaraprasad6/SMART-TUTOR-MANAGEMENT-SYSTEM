@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration & Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('images/books1.jpg'); /* Replace 'your-image.jpg' with your image path */
+    background-size: cover; /* Ensure the image covers the entire body */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat
+
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
+<body>
+<h></h>
+    <div class="container">
+        <!-- Registration Form -->
+        <div id="register-form" class="form-container">
+            <h2>Student Sign-Up</h2>
+            <form action="/reg1" method="post">
+                <input type="text" placeholder="Full Name" name="fname" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Password" name="pwd" required>
+                <input type="password" placeholder="Confirm Password" name="pwd1"required>
+                <button type="submit">Register</button>
+                <p>Already have an account? <a href="/StuDash" onclick="showLogin()">Login</a></p>
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-container hidden">
+            <h2>Student Login</h2>
+            <form action="/log2" method="post">
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="pwd" name="pwd"required>
+                <button type="submit">Login</button>
+                <p><a href="student.html">Forgot Password?</a></p>
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Sign Up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>

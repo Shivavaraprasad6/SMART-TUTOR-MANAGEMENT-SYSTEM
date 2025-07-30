@@ -1,0 +1,261 @@
+</html>  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f5f9;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background-color: #1e7f21;
+            color: #fff;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .sidebar li {
+            padding: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+            border-bottom: 1px solid #15ad4c;
+            text-align: center;
+        }
+
+        .sidebar li:hover,
+        .sidebar .active {
+            background-color: #15ad4c;
+        }
+
+        /* Profile Info in Sidebar */
+        .sidebar-profile {
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #818783;
+        }
+
+        .sidebar-profile img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #15ad4c;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-profile h4 {
+            font-size: 20px;
+            margin: 5px 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .sidebar-profile p {
+            font-size: 14px;
+            margin: 2px 0;
+            color: #c7f7c9;
+        }
+
+        .logout-btn {
+            background-color: #d9534f;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 5;
+            padding: 20px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .profile-section h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #1e7f21;
+        }
+
+        input, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #1e7f21;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #15ad4c;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Student Dashboard</h2>
+
+        <!-- Display Student Profile in Sidebar -->
+        <div id="sidebar-profile" class="sidebar-profile">
+            <img id="sidebar-photo" src="" alt="Profile Photo">
+            <h4 id="sidebar-name"></h4>
+            <p id="sidebar-email"></p>
+            <p id="sidebar-phone"></p>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <!-- <nav>
+            <a href="/courses">Tutor</a>
+        </nav> -->
+        
+            <!-- <li class="active" onclick="showSection('profile-section')">Profile</li>
+            <li onclick="showSection('tutors-section')">Tutors</li>
+            <li onclick="showSection('enrolled-section')">Enrolled Courses</li>
+            <li onclick="showSection('payment-section')">Payment History</li>
+        </ul>  -->
+        <ul>
+            <li onclick="window.location.href =('/')">Home</li>
+            <li class="active" onclick="showSection('profile-section')">Profile</li>
+            <li onclick="window.location.href =('/courses')">Tutors</li>
+            <!-- <li onclick="showSection('enrolled-section')">Enrolled Courses</li>
+            <li onclick="showSection('payment-section')">Payment History</li> -->
+            <button onclick="logout()">Logout</button>
+        </ul>
+        
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Profile Section -->
+        <div id="profile-section" class="profile-section">
+            <h3>Register Your Profile</h3>
+            <input type="text" id="student-name" placeholder="Full Name" required />
+            <input type="email" id="student-email" placeholder="Email" required />
+            <input type="text" id="student-phone" placeholder="Phone Number" required />
+            <textarea id="student-address" placeholder="Address" required></textarea>
+            <input type="file" id="student-photo" accept="image/*" />
+
+            <button onclick="registerProfile()">Submit</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+function registerProfile() {
+    const name = document.getElementById('student-name').value;
+    const email = document.getElementById('student-email').value;
+    const phone = document.getElementById('student-phone').value;
+    const address = document.getElementById('student-address').value;
+    const photoFile = document.getElementById('student-photo').files[0];
+
+    if (!name || !email || !phone || !address || !photoFile) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    // Display in sidebar
+    document.getElementById('sidebar-name').innerText = name;
+    document.getElementById('sidebar-email').innerText = email;
+    document.getElementById('sidebar-phone').innerText = phone;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        document.getElementById('sidebar-photo').src = event.target.result;
+    };
+    reader.readAsDataURL(photoFile);
+
+    document.getElementById('sidebar-profile').style.display = 'block';
+}
+
+function logout() {
+    // Clear data
+    document.getElementById('sidebar-name').innerText = '';
+    document.getElementById('sidebar-email').innerText = '';
+    document.getElementById('sidebar-phone').innerText = '';
+    document.getElementById('sidebar-photo').src = '';
+
+    // Hide sidebar profile
+    document.getElementById('sidebar-profile').style.display = 'none';
+
+    alert("You have been logged out!");
+}
+
+function showSection(section) {
+    document.getElementById('profile-section').style.display = section === 'profile-section' ? 'block' : 'none';
+}
+
+// Initial display
+showSection('profile-section');
+
+</script>
+
+</body>
+</html>

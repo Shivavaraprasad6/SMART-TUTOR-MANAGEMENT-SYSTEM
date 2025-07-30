@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .dashboard-container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #0a8c38;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar h3 {
+            color: #fff;
+            font-size: 22px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+        }
+
+        .sidebar button {
+            width: 100%;
+            padding: 15px;
+            background-color: #0a8c38;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: left;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+
+        .sidebar button:hover {
+            background-color: #066c28;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        h3 {
+            color: #0a8c38;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input, select, button, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #0a8c38;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #066c28;
+        }
+
+        .course-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <h3>Tutor Dashboard</h3>
+            <button onclick="window.location.href =('/')">Home</button>
+            <button onclick="showSection('profile')">Profile</button>
+            <button onclick="window.location.href =('/courses')">Courses</button>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <div class="main-content">
+            <div id="profile-section">
+                <h3>Create/Edit Profile</h3>
+                <form id="profileForm" onsubmit="saveProfile(event)">
+                    <input type="text" id="name" placeholder="Name" required />
+                    <input type="email" id="tutorEmail" placeholder="Email" required />
+                    <input type="text" id="location" placeholder="location" required />
+                    <input type="text" id="subject" placeholder="Subject" required />
+                    <input type="text" id="package" placeholder="Package" required />
+                    <input type="text" id="duration" placeholder="Duration" required />
+                    <select id="mode" required>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                    <label for="linkedinUrl">LinkedIn URL:</label>
+                    <input type="url" id="linkedinUrl" placeholder="LinkedIn URL" />
+                    <label for="experience">Years of Experience:</label>
+                    <input type="number" id="experience" placeholder="Years of Experience" min="0" />
+                    <label for="certificate">Experience Certificate/Degree certificate:</label>
+                    <input type="file" id="certificate" accept="application/pdf, image/*" />
+                    <label for="photo">profile Photo:</label>
+                    <input type="file" id="photo" accept="image/*" />
+                    <label for="video">Demo Video:</label>
+                    <input type="file" id="video" accept="video/*" />
+                    <button type="submit">Save Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const profileForm = document.getElementById('profileForm');
+        const logoutLink = document.getElementById('logoutLink');
+        const enrolledCoursesLink = document.getElementById('enrolledCoursesLink');
+        const enrolledCoursesListDiv = document.getElementById('enrolledCoursesList');
+        const coursesListUl = document.getElementById('coursesList');
+
+        let editingIndex = null; // To track if we are editing an existing profile
+
+        // Function to load existing profile data for editing
+        function loadProfileForEdit() {
+            const editIndex = localStorage.getItem('editProfileIndex');
+            if (editIndex !== null) {
+                editingIndex = parseInt(editIndex);
+                const storedProfiles = JSON.parse(localStorage.getItem('tutorProfiles'));
+                if (storedProfiles && storedProfiles[editingIndex]) {
+                    const profileToEdit = storedProfiles[editingIndex];
+                    document.getElementById('name').value = profileToEdit.name;
+                    document.getElementById('tutorEmail').value = profileToEdit.email;
+                    document.getElementById('location').value = profileToEdit.location;
+                    document.getElementById('subject').value = profileToEdit.subject;
+                    document.getElementById('package').value = profileToEdit.package;
+                    document.getElementById('duration').value = profileToEdit.duration;
+                    document.getElementById('mode').value = profileToEdit.mode;
+                    document.getElementById('linkedinUrl').value = profileToEdit.linkedinUrl || '';
+                    document.getElementById('experience').value = profileToEdit.experience || '';
+                    // Note: File inputs cannot be pre-filled for security reasons.
+                    localStorage.removeItem('editProfileIndex'); // Clear the edit flag
+                } else {
+                    editingIndex = null; // Reset if profile not found
+                }
+            } else {
+                editingIndex = null; // Not in edit mode
+            }
+        }
+
+        // Load profile for edit on page load
+        loadProfileForEdit();
+
+        function saveProfile(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const tutorEmail = document.getElementById('tutorEmail').value;
+            const location = document.getElementById('location').value;
+            const subject = document.getElementById('subject').value;
+            const packageInfo = document.getElementById('package').value;
+            const duration = document.getElementById('duration').value;
+            const mode = document.getElementById('mode').value;
+            const linkedinUrl = document.getElementById('linkedinUrl').value;
+            const experience = document.getElementById('experience').value;
+            const certificateFile = document.getElementById('certificate').files[0];
+            const photoFile = document.getElementById('photo').files[0];
+            const videoFile = document.getElementById('video').files[0];
+
+            let profile = {
+                name: name,
+                email: tutorEmail,
+                location: location,
+                subject: subject,
+                package: packageInfo,
+                mode: mode,
+                duration: duration,
+                linkedinUrl: linkedinUrl,
+                experience: experience,
+                certificate: "",
+                profile: "",
+                video: ""
+            };
+
+            const storedProfiles = JSON.parse(localStorage.getItem('tutorProfiles')) || [];
+
+            if (certificateFile) {
+                profile.certificate = certificateFile.name;
+            } else if (editingIndex !== null && storedProfiles[editingIndex] && storedProfiles[editingIndex].certificate) {
+                profile.certificate = storedProfiles[editingIndex].certificate;
+            }
+
+            if (photoFile) {
+                profile.profile = URL.createObjectURL(photoFile);
+            } else if (editingIndex !== null && storedProfiles[editingIndex] && storedProfiles[editingIndex].profile) {
+                profile.profile = storedProfiles[editingIndex].profile;
+            } else {
+                profile.profile = "https://via.placeholder.com/100"; // Default placeholder
+            }
+
+            if (videoFile) {
+                profile.video = URL.createObjectURL(videoFile);
+            } else if (editingIndex !== null && storedProfiles[editingIndex] && storedProfiles[editingIndex].video) {
+                profile.video = storedProfiles[editingIndex].video;
+            } else {
+                profile.video = "https://www.w3schools.com/html/mov_bbb.mp4"; // Default video URL
+            }
+
+            if (editingIndex !== null) {
+                storedProfiles[editingIndex] = profile;
+                editingIndex = null; // Reset edit mode after saving
+                alert('Profile updated successfully!');
+            } else {
+                storedProfiles.push(profile);
+                alert('Profile saved successfully!');
+            }
+
+            localStorage.setItem('tutorProfiles', JSON.stringify(storedProfiles));
+             window.location.href = '/courses';
+        }
+
+        function loadCourses() {
+            // Not directly used here
+        }
+
+        function logout() {
+            localStorage.removeItem('tutorProfiles');
+            localStorage.removeItem('editProfileIndex');
+            alert('All tutor profiles cleared.');
+            profileForm.reset();
+            editingIndex = null;
+        }
+
+        enrolledCoursesLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            enrolledCoursesListDiv.style.display = 'block';
+            displayEnrolledCourses();
+        });
+
+        function displayEnrolledCourses() {
+            const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+            coursesListUl.innerHTML = '';
+
+            if (enrolledCourses.length === 0) {
+                coursesListUl.innerHTML = '<li>No courses enrolled yet.</li>';
+            } else {
+                enrolledCourses.forEach(course => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${course.name} (Enrolled: ${course.enrolledCount || 0})`;
+                    coursesListUl.appendChild(listItem);
+                });
+            }
+        }
+
+        function enrollStudentInCourse(courseName, studentName) {
+            let enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+            let courseIndex = enrolledCourses.findIndex(course => course.name === courseName);
+
+            if (courseIndex === -1) {
+                enrolledCourses.push({
+                    name: courseName,
+                    enrolledCount: 1,
+                    students: [studentName]
+                });
+            } else {
+                enrolledCourses[courseIndex].enrolledCount++;
+                enrolledCourses[courseIndex].students.push(studentName);
+            }
+
+            localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
+        }
+
+        enrollStudentInCourse('Web Development', 'Alice');
+        enrollStudentInCourse('Web Development', 'Bob');
+        enrollStudentInCourse('Python Basics', 'Charlie');
+
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            logout();
+        });
+    </script>
+</body>
+</html>

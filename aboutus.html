@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>
+		About Us
+	</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="/image/x-icon" href="/images/logo.png">
+	<link rel="stylesheet" href="stylesheet.css">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&family=Courgette&family=Open+Sans:wght@300;400&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Comforter&family=Comic+Neue:ital,wght@1,700&family=Courgette&family=Lato:wght@300&family=Marvel&family=Open+Sans+Condensed:wght@300&display=swap');
+* { box-sizing: border-box; }
+body 
+{ 
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/*  Page Opening Image */
+.reveal {
+    position: relative;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 2s ease;
+}
+.reveal.active {
+    transform: translateY(-20px);
+    opacity: 1;
+}
+img.reveal {
+    position: relative;
+    transform: translateX(-70px);
+    opacity: 0;
+    transition: all 2s ease;
+}
+img.reveal.active {
+    transform: translateX(20px);
+    opacity: 1;
+}
+
+#im
+{
+	background-image:url(images/meeting.JPG);
+	background-repeat: no-repeat;
+	width:100%;
+	height: 530px;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-top: 10px;
+	background-size:100% 120%;
+}
+/*  About Us Header Opening */
+.p1
+{
+	opacity:0.6;
+	
+	font-family:"Lato";
+	font-weight:bold;
+	font-size:4em;
+	
+	background-color:#F2FFE9;
+	
+	padding:20px;
+	
+	
+	text-align:center;
+
+}
+/* First Styled Quote */
+.first
+{
+	font-family:comforter;
+	text-align:center;
+	font-size:3em;
+}
+
+/* Section 1 : About Us Paragraph */
+.about
+{
+	opacity:1;
+	
+	font-family:"Marvel" ;
+	font-weight:bold;
+	font-size:1.8em;
+	text-align:center;
+	
+	
+	padding-top:20px;
+	padding-bottom:10px;
+	padding-left:200px;
+	padding-right:200px;
+	
+
+	
+}
+/*  Section 2 :How We Started  */
+.start
+{
+	display:flex;
+	margin-top:30px;
+	background-color:#F2FFE9;
+}
+
+
+.quote1
+{
+	
+	font-family:Comic Neue;
+	font-size:1.7em;
+	
+	color:#322D31;
+	
+	
+	margin-top:5px;
+	margin-left:5px;
+	padding:53px;
+}
+/* Title design Common For eaxh Section */
+.goal
+{
+	margin:50px 2px 50px 0px;
+	
+	padding-left:70px;
+	
+	color:#146356;
+	
+	text-shadow:3px 3px #C2BFBA;
+	
+	font-family:Comic Sans MS;
+	font-size:4em;
+}
+/* Secion 3: Aims And Motives */
+
+#defs
+{
+	display:flex;
+}
+.noted
+{
+
+	
+	margin-right:15px;
+	padding-right:30px;
+}
+
+ul
+{
+	list-style:none;
+	margin-left:100px;
+}
+li
+{
+	
+	margin: 30px 0px 30px 0px;
+	
+	font-size:1.8em;
+	font-family:Comic Neue;
+ 
+}
+ul span
+{
+	font-weight:bold;
+	display : inline-block;
+	text-decoration:underline dotted;
+    transition: all 0.5s ease;
+}
+ul span:hover
+{
+    transform: translateY(-10px);
+}
+/* Section 4: Card Flips */
+/* Front Face Design*/
+.title
+{
+	background-color:#FFF1BD;
+	font-size:2em;
+	padding-right:30px;
+	padding-left:30px;
+}
+.front
+{
+	border-style:solid;
+	border-width:thick;
+	border-radius:13px;
+	border-color:#F3C892;
+}
+/* Back Face Design */
+.back 
+{
+
+	padding-bottom:30px;
+	border-style:solid;
+	border-width:thick;
+	border-radius:13px;
+	border-color:white;
+	background-color:#F3C892;
+	color: white;
+	text-align:center;
+	transform: rotateY(180deg);
+	font-size:1.8em;
+}
+/* Positioning And Card Flip Hover Effect */
+.card 
+{
+  flex:40%;
+  padding:0px 30px   0px 30px;
+  width: 330px;
+  height: 400px;
+  
+}
+
+.inner 
+{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.168);
+}
+
+.card:hover .inner 
+{
+  transform: rotateY(180deg);
+}
+
+.front, .back 
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.row
+{
+	display:flex;
+	padding:20px;
+}
+/* Section 4: Contact Us */
+table
+{
+	height:200px;
+	width:900px;
+	margin:auto;
+	border-spacing:5px;
+	font-family:Comic Neue;
+	font-size:1.2em;
+}
+tr,td
+{
+	padding:7px;
+}
+table.ideas tr:nth-child(odd)
+{
+	background-color:#F2FFE9;
+	font-size:1.3em;
+	
+}
+table a:hover
+{
+	color:rgba(0, 0, 0, 0.712);
+	text-decoration:none;
+	
+}
+table a 
+{
+	color:#146356;
+	
+}
+/* Section 4: Socials Button */
+.connect
+{
+	margin-top:50px;
+	text-align:center;
+	display:flex;
+	background-color:#eeeeee;
+	padding:50px;
+}
+
+.connect a
+{
+	text-decoration:none;
+}
+
+#socials
+{
+	display:block;
+	margin:auto;
+	box-shadow:5px 5px grey;
+	padding:10px;
+	border-radius:15px;
+	background-color:white;
+	width:700px;
+}
+.header1 nav {
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center; /* Vertically align items */
+        }
+
+        .header1 nav a {
+            font-size: 1.2em; /* Increase font size */
+            font-weight: bold; /* Make text bold */
+            margin-left: 20px; /* Add spacing between links */
+            text-decoration: none; /* Remove underlines */
+            color: black; /* Set text color */
+        }
+
+        .header1 nav a.button {
+            /* Keep button styles as they are */
+            .header1 nav a.button {
+    background-color: #D9534F; /* Example button color */
+    color: white; /* Example text color */
+    text-decoration: none; /* Remove underlines */
+    font-size: 1em; /* Adjust font size as needed */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Adjust padding for button size */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-weight: bold; /* Make the button text bold */
+
+}
+
+.header1 nav a.button:hover {
+    background-color: #c04744; /* Darker color on hover */
+}
+
+/* Optionally, you can add different styles for different buttons */
+.header1 nav a.button.secondary {
+    background-color: #96CEB4; /* Example secondary button color */
+    color: black;
+}
+
+.header1 nav a.button.secondary:hover {
+    background-color: #82b9a1;
+}
+
+.header1 nav a.button.outline{
+  background-color: transparent;
+  color: #D9534F;
+  border: 2px solid #D9534F;
+}
+
+.header1 nav a.button.outline:hover{
+  background-color: #f8f8f8;
+}
+        }
+
+</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.n_form').validate();
+		});
+	</script>
+
+</head>
+<body>
+    <header class="header1">
+
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"> <img src="/images/logo2.png" alt="Logo"> </a>
+            </div>
+            <nav>
+                <a href="/">HOME</a>
+                <a href="/aboutus">ABOUT US</a>
+                <a href="/courses">COURSES</a>               
+                <a class="button" href="/signup&login">LOGIN</a>
+            </nav>
+        </div>
+        
+    </header>
+	<main>
+		<div id="im">
+			<p class="p1">
+				About Us
+			</p>
+		</div>
+
+	<div>
+		<div >
+		<p class="first ">Empowering Educators to improve our world</p>
+		<p class="about ">
+			Level up is a revolutionary online education platform that provides
+			on-demand tutoring and online courses.<br> Our platform enables thousands of tutors to share
+			their knowledge with students around the globe.<br> Whether you need help
+			with high school algebra or you want to learn how to program in Python, we
+			have a perfect tutor for you.<br>At Level up, we create a human connection to
+			help students reach their full potential in and out of the classroom.<br> It is not just
+			a place for enriching students’ education, but also enhancing values such as time-management and work ethic.			
+			<br>Through this journey that the students and mentors take, the students will also build confidence
+			and passion in their own lives.
+		
+	
+		</p>
+		</div>
+		
+		<div class="goal ">
+			How We Started
+		</div>
+		<div class="start">
+			
+			
+			<img src="/images/logo.PNG" width="400" height="350" alt="h" class="reveal">
+			
+			
+			<p class="quote1">
+			<b>In a world where education is still considered a luxury and environment is taken for granted, 
+			our founder thought he can atleast try to change one.<br>
+			We at Level Up believe that by widening the reach of education, by making it easily available,
+			 in different languages, so much can be achieved and changed.</b>
+		</p>
+		</div>
+	</div>
+	
+	
+	
+	
+
+	
+		<div >
+			<p class="goal">
+				Aims And Motives:				
+			</p>
+
+		</div>
+		
+		
+	
+	<div id="defs" >
+		
+		
+		<div>
+			
+				<ul>
+				<li><span>A  Goal</span> is the outcome of of successfully completed objectives measured over a series of days.</li>
+				<li><span >An  Aim</span> is the product of a long term endevour measured over a course of one or  more years.</li>
+				<li><span >A  Motive</span> is what drives someone to follow their aims and goals.</li>
+				</ul>
+			
+		</div>
+		
+		<div class="noted ">
+			<img src="images/notes.PNG" width="400" height="350" alt="h" >
+		</div>
+	</div>
+	
+<div class="row reveal">
+<div class="card">
+	<div class="inner">
+		<div class="front">
+			<p class ="title">For knowledge</p> 
+			 <img src="images/know.PNG" width="290" height="270" alt="h">
+		</div>
+		<div class="back">
+			<p>
+				Striving for a better educated future as knowledge is the most powerful
+				weapon in which someone can use to change his live.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+  <div class="inner">
+    <div class="front">
+	<p class ="title">For teachers</p> 
+      <img src="images/teach.PNG" width="290" height="270" alt="h">
+    </div>
+    <div class="back">
+    <p>Empowering teachers to share their experience and information 
+				with students all around the world. Collaborating in the cooperation among 
+				educators to offer the best for their knowledge.
+	</p>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="inner">
+    <div class="front">
+	<p class ="title">For students</p> 
+      <img src="images/stu.PNG" width="290" height="270" alt="h">
+    </div>
+    <div class="back">
+
+      
+      <p>Helping students succeed extends beyond enhancing their academic experience. 
+				We aim to make an impact in multiple areas of their lives and in their communities.  </p>
+    </div>
+  </div>
+</div>
+
+</div>
+	
+
+		
+		
+				<div class="goal">
+					<p>
+						Contact Us:
+					</p>
+				</div>
+		
+		
+	
+<div class="info ">	
+
+	<table class="ideas">
+	
+	<tr>
+	
+		<td >
+		General Inquiries
+		</td>
+		
+		<td >
+		Careers
+		</td>
+		
+	</tr>	
+	<tr>
+		<td>
+		If you have questions, suggestions or concerns, we'd love to hear from you. 
+		Please message at our Help Center <a href="mailto:yasmeenhfadel@gmail.com">services@levelup.com</a>
+		</td>
+	
+		<td>
+		Help us improve online tutoring at Level Up.
+		If you'd like to apply to become a tutor, please <a href="SignUp_Login.html">sign up</a> to our website.
+		</td>
+	
+	</tr>
+	<tr>
+		<td >
+		Business Development
+		</td>
+		
+		<td >
+		Press
+		</td>
+	</tr>
+	<tr>
+		<td>
+		Have ideas about ways we can work together?
+	    <br>Email us at <a href="mailto:yasmeenhfadel@gmail.com">hello@levelup.com</a>
+		</td>
+		
+		<td>
+		We're always happy to chat with members of the press. Contact us at <a href="mailto:yasmeenhfadel@gmail.com">levelup@gmail.com</a>
+		</td>
+	</tr>
+	</table>
+</div>
+	
+	<div class="connect">
+		<br>
+		<div id="socials" >
+			<p ><font face="Comic sans ms" size="5px">
+			
+			So as to stay tuned with all our future projects,achievements and activities don't forget to follow us via:</font> </p>
+			
+			
+		</div>
+	</div>
+	
+	</main>
+	 
+	
+
+		<script>
+			window.addEventListener('scroll',reveal); 
+			function reveal(){
+				var reveals = document.querySelectorAll('.reveal');
+				for(var i = 0; i<reveals.length;i++) {
+					var windowheight = window.innerHeight;
+					var revealtop = reveals[i].getBoundingClientRect().top;
+					if(revealtop < windowheight) {
+						reveals[i].classList.add('active');
+	
+					}
+					else {
+						reveals[i].classList.remove('active');
+					}
+				}
+			}
+		</script>
+</body>
+
+
+
